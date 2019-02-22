@@ -1,4 +1,6 @@
+<a href="https://travis-ci.org/joshuapowell/chart-exercise" target="_blank">
 <img src="https://travis-ci.org/joshuapowell/chart-exercise.svg?branch=master" />
+</a>
 
 # Chart from CSV
 Parse a CSV and generate a bar chart of the data.
