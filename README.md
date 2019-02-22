@@ -19,18 +19,14 @@ version of the chart to a file in the `output` directory.
 <p><img src="output/example-textfile.png" />
 <em>Example textfile output for `data/sample1.csv`</em></p>
 
-If you don't see a bar chart that looks similar to the image above, check the
-following.
-
-1. Have you downloaded this code?
-2. Did you run the command while you were in the project directory?
-
 ## Caveats
 
 1. Please make the first column of your spreadsheet the X-axis label value 
    (i.e., year).
 2. Please make sure your CSV has a header row at row 1, if it does not, the
    data in row 1 will be skipped.
+3. Currently this package only support comma-separated-values and does not
+   support XLSX, XLS, or tab-separated-values.
 
 ## Examples
 Example CSV files for testing have been added to the `data` directory.
