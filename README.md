@@ -13,11 +13,11 @@ python run.py --file=data/sample1.csv
 Running the command should produce a chart in the console and saves a `*.txt`
 version of the chart to a file in the `output` directory.
 
-<img src="output/example-console.png" />
-<em>Example console output for `data/sample1.csv`</em>
+<p><img src="output/example-console.png" />
+<em>Example console output for `data/sample1.csv`</em></p>
 
-<img src="output/example-textfile.png" />
-<em>Example textfile output for `data/sample1.csv`</em>
+<p><img src="output/example-textfile.png" />
+<em>Example textfile output for `data/sample1.csv`</em></p>
 
 If you don't see a bar chart that looks similar to the image above, check the
 following.
