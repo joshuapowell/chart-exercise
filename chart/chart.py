@@ -8,7 +8,7 @@ import time
 import sys
 
 
-class Chart:
+class Chart(object):
     """Create a chart from a CSV."""
 
     def __init__(self, file, show_values, style=None):

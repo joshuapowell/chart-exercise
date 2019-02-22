@@ -3,7 +3,8 @@
 """Command Line Interface for Nielsen CSV to Chart Exercise."""
 
 
-from . import argparse
+import argparse
+from . import utilities
 
 
 class ChartCLI(object):

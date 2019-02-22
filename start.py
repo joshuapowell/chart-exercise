@@ -3,9 +3,8 @@
 """Command Line Interface for Nielsen CSV to Chart Exercise."""
 
 
-from chart import chart_cli
-from chart import Chart
-from chart import utilities
+from chart import cli
+from chart.chart import Chart
 
 
 if __name__ == "__main__":
@@ -16,14 +15,14 @@ if __name__ == "__main__":
     
     :param None
     """
-    arguments = chart_cli.ChartCLI()
+    arguments = cli.ChartCLI()
 
     """Load and display the chart based on user defined values.
     """
-    if 'file' not in chart_cli or not chart_cli.file:
+    if 'file' not in arguments.args or not arguments.args.file:
         print "Please include a path to a CSV file to parse"
     else:
         chart = Chart(**{
-            "file": chart_cli.file, 
-            "show_values": chart_cli.show_values
+            "file": arguments.args.file, 
+            "show_values": arguments.args.show_values
         })
