@@ -28,7 +28,7 @@ class Chart(object):
 
         self.show_values = show_values
 
-        self.load()
+        self.output_file = self.load()
 
     def is_number(self, n):
         """Validate if n is a valid positive or negative number.
@@ -191,3 +191,6 @@ class Chart(object):
         chart_output.close()
 
         print "A copy of this chart was saved to %s" % chart_output_filename
+        
+        return chart_output_filename
+
