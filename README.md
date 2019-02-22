@@ -33,9 +33,7 @@ following.
    data in row 1 will be skipped.
 
 ## Examples
-Several example cases have been added to the system in order to test the
-capabilities of the Chart display tool. These sample files can be found in the
-`data` directory.
+Example CSV files for testing have been added to the `data` directory.
 
 ## Testing
 To execute testing a virtual environment with the following test packages must
