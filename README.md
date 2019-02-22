@@ -9,7 +9,7 @@ project, enter the following command at the command prompt from the project's
 root directory.
 
 ```
-python start.py --file=data/sample1.csv
+python run.py --file=data/sample1.csv
 ```
 
 Running the command should produce a chart that looks like this.
