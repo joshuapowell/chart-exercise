@@ -20,7 +20,7 @@ if __name__ == "__main__":
     """Load and display the chart based on user defined values.
     """
     if 'file' not in arguments.args or not arguments.args.file:
-        print "Please include a path to a CSV file to parse"
+        print("Please include a path to a CSV file to parse")
     else:
         chart = Chart(**{
             "file": arguments.args.file, 

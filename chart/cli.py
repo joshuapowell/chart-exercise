@@ -9,10 +9,10 @@ from . import utilities
 
 class ChartCLI(object):
     """Command Line Interface.
-    
+
     Setup named application arguments and command line interface help
     information.
-    
+
     :param (class) self
         The representation of the instantiated Class Instance
     :param (class) parser
@@ -23,7 +23,7 @@ class ChartCLI(object):
 
     def __init__(self, parser=None, args=None):
         """Command Line Interface constructor.
-        
+
         :param (object) self
         :param (object) parser
         :param (object) args

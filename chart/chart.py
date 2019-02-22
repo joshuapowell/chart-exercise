@@ -75,13 +75,13 @@ class Chart(object):
 
         """Check that value is a number before proceeding."""
         value = self.get_value(columnValue)
-        
+
         """First bar in each group has label, accomodate for year label."""
         buffer = ""
 
         if index != 1:
             buffer = "     "
-        
+
         """Determine if display is positive or negative."""
         if value < 0:
             display = (-value*self.style[current_style])
@@ -119,7 +119,13 @@ class Chart(object):
         return key
 
     def get_lowest_value(self, data):
+        """Return lowest value in the data set.
 
+        :param (object) self
+        :param (object) data
+
+        :return None
+        """
         lowest = 0
 
         for row in data:
@@ -145,7 +151,7 @@ class Chart(object):
                 reader = csv.reader(csvfile)
 
                 adjust_zero = self.get_lowest_value(reader)
-                
+
                 csvfile.seek(0)
 
                 for row_index, row in enumerate(reader):
@@ -154,43 +160,42 @@ class Chart(object):
 
                     if row_index == 0:
                         legend = self.get_legend(row)
-                        print legend                        
-                        chart_output.write(legend.encode('utf-8'))
+                        print(legend)
+                        chart_output.write(str(legend.encode('utf-8')))
                         chart_output.write("\r")
                     else:
-                        column_ = self.get_styled_value(1, 
-                                                        row[1], 
+                        column_ = self.get_styled_value(1,
+                                                        row[1],
                                                         current_style,
                                                         adjust_zero)
                         group_row = "%s %s" % (row[0], column_)
 
-                        print group_row
-                        chart_output.write(group_row.encode('utf-8'))
+                        print(group_row)
+                        chart_output.write(str(group_row.encode('utf-8')))
 
                         for column_index, column in enumerate(row):
 
                             current_style = 0 if current_style == 1 else 1
 
                             if column_index != 0 and column_index != 1:
-                              col_group = self.get_styled_value(column_index, 
-                                                                column,
-                                                                current_style,
-                                                                adjust_zero)
-                              print col_group
-                              chart_output.write("\r")
-                              chart_output.write(col_group.encode('utf-8'))
+                                col_ = self.get_styled_value(column_index,
+                                                             column,
+                                                             current_style,
+                                                             adjust_zero)
+                                print(col_)
+                                chart_output.write("\r")
+                                chart_output.write(str(col_.encode('utf-8')))
 
                         chart_output.write("\r")
 
-                    print "\r"
+                    print("\r")
                     chart_output.write("\r")
 
         except Exception:
-            print "Unable to open your CSV file"
+            print("Unable to open your CSV file")
 
         chart_output.close()
 
-        print "A copy of this chart was saved to %s" % chart_output_filename
-        
-        return chart_output_filename
+        print("A copy of this chart was saved to %s" % chart_output_filename)
 
+        return chart_output_filename
