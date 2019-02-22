@@ -61,6 +61,12 @@ Finally, to install the testing packages execute the following command.
 pip install -r requirements.txt
 ```
 
+To run all tests, linters, and security checks, simply executed:
+
+```
+bash test.sh
+```
+
 ## Objectives
 
 1. Use any programming language
