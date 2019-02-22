@@ -1,6 +1,10 @@
 # Chart from CSV
 Parse a CSV and generate a bar chart of the data.
 
+## Installation
+You do not need to install anything for this script to execute. The only 
+requirement is Python 2.7.
+
 ## Usage
 To convert a file name `sample1.csv` that lives in the `data` directory of this
 project, enter the following command at the command prompt from the project's
