@@ -242,3 +242,19 @@ class TestExample(unittest.TestCase):
         """Whole Number."""
         value = Chart(file="", show_values=False).get_legend(["profit","employees","year"])
         self.assertEquals(value, "\nKey: employees ░ year ▓ zero |")
+
+
+    def test_chartGetLowestValue(self):
+        """Whole Number."""
+        value = Chart(file="", show_values=False).get_lowest_value([[10,10,10,10],[1,1,1,1]])
+        self.assertEquals(value, 0)
+
+    def test_chartGetLowestValueNegative1(self):
+        """Whole Number."""
+        value = Chart(file="", show_values=False).get_lowest_value([[10,10,10,10],[1,1,-1,1]])
+        self.assertEquals(value, -1)
+
+    def test_chartGetLowestValueNegative2(self):
+        """Whole Number."""
+        value = Chart(file="", show_values=False).get_lowest_value([[10,10,10,10],[1,1,-1,1],[-99,-100.02,0.091789,-0.0089881]])
+        self.assertEquals(value, -100)        
