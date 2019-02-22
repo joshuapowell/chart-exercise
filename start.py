@@ -60,7 +60,7 @@ class Chart:
 
         return 0
 
-    def get_styled_value(self, columnValue, current_style):
+    def get_styled_value(self, index, columnValue, current_style, adjust_zero):
         """Return a styled bar value based on column value and style.
 
         :param (object) self
@@ -74,12 +74,28 @@ class Chart:
         if self.show_values:
             labels = "(%s)" % (columnValue)
 
+        """Check that value is a number before proceeding."""
         value = self.get_value(columnValue)
-        style = self.style[current_style]
+        
+        """First bar in each group has label, accomodate for year label."""
+        buffer = ""
 
-        display = (value*style)
-
-        return ("%s %s") % (display, labels)
+        if index != 1:
+            buffer = "     "
+        
+        """Determine if display is positive or negative."""
+        if value < 0:
+            display = (-value*self.style[current_style])
+            adjust_zero_ = ""
+            if adjust_zero:
+                adjust_zero_ = (value-adjust_zero)*" "
+            return ("%s%s%s| %s") % (adjust_zero_, buffer, display, labels)
+        else:
+            display = (value*self.style[current_style])
+            adjust_zero_ = ""
+            if adjust_zero:
+                adjust_zero_ = -adjust_zero*" "
+            return ("%s%s|%s %s") % (adjust_zero_, buffer, display, labels)
 
     def get_legend(self, row):
         """Return a styled legend/key for the chart.
@@ -101,6 +117,17 @@ class Chart:
 
         return key
 
+    def get_lowest_value(self, data):
+
+        lowest = 0
+
+        for item in data:
+            value = self.get_value(item)
+            if value < lowest:
+                lowest = value
+
+        return lowest
+
     def load(self):
         """Load data for chart and draw bar chart.
 
@@ -108,33 +135,40 @@ class Chart:
 
         :return None
         """
-        try:
-            with open(self.file) as csvfile:
+        # try:
+        with open(self.file) as csvfile:
                 reader = csv.reader(csvfile)
 
                 for row_index, row in enumerate(reader):
 
                     current_style = 0
 
+                    # NEED TO CHECK HERE FOR LOWEST NEGATIVE VALUE
+                    adjust_zero = self.get_lowest_value(row)
+
                     if row_index == 0:
                         print self.get_legend(row)
                     else:
-                        column_ = self.get_styled_value(row[1], current_style)
-                        print "%s |%s" % (row[0], column_)
+                        column_ = self.get_styled_value(1, 
+                                                        row[1], 
+                                                        current_style,
+                                                        adjust_zero)
+                        print "%s %s" % (row[0], column_)
 
                         for column_index, column in enumerate(row):
 
                             current_style = 0 if current_style == 1 else 1
 
                             if column_index != 0 and column_index != 1:
-                                column_n = self.get_styled_value(column,
-                                                                 current_style)
-                                print "     |%s" % (column_n)
+                                print self.get_styled_value(column_index, 
+                                                            column,
+                                                            current_style,
+                                                            adjust_zero)
 
                     print "\r"
 
-        except Exception:
-            print "Unable to open your CSV file"
+        # except Exception:
+        #     print "Unable to open your CSV file"
 
 
 if sys.argv and len(sys.argv) >= 2:
