@@ -144,10 +144,10 @@ class Chart(object):
         :return None
         """
         chart_output_filename = "output/chart-%s.txt" % (time.time())
-        chart_output = open(chart_output_filename, "w")
+        chart_output = open(chart_output_filename, "wb")
 
-        try:
-            with open(self.file) as csvfile:
+        # try:
+        with open(self.file) as csvfile:
                 reader = csv.reader(csvfile)
 
                 adjust_zero = self.get_lowest_value(reader)
@@ -161,8 +161,8 @@ class Chart(object):
                     if row_index == 0:
                         legend = self.get_legend(row)
                         print(legend)
-                        chart_output.write(str(legend.encode('utf-8')))
-                        chart_output.write("\r")
+                        chart_output.write(legend.encode('utf-8'))
+                        chart_output.write(b"\r")
                     else:
                         column_ = self.get_styled_value(1,
                                                         row[1],
@@ -171,7 +171,7 @@ class Chart(object):
                         group_row = "%s %s" % (row[0], column_)
 
                         print(group_row)
-                        chart_output.write(str(group_row.encode('utf-8')))
+                        chart_output.write(group_row.encode('utf-8'))
 
                         for column_index, column in enumerate(row):
 
@@ -183,16 +183,16 @@ class Chart(object):
                                                              current_style,
                                                              adjust_zero)
                                 print(col_)
-                                chart_output.write("\r")
-                                chart_output.write(str(col_.encode('utf-8')))
+                                chart_output.write(b"\r")
+                                chart_output.write(col_.encode('utf-8'))
 
-                        chart_output.write("\r")
+                        chart_output.write(b"\r")
 
                     print("\r")
-                    chart_output.write("\r")
+                    chart_output.write(b"\r")
 
-        except Exception:
-            print("Unable to open your CSV file")
+        # except Exception:
+        #     print("Unable to open your CSV file")
 
         chart_output.close()
 
