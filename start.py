@@ -26,7 +26,7 @@ class Chart:
             u'\u2591',
             u'\u2593'
         ]
-        self.output = ""
+
         self.show_values = show_values
 
         self.load()
@@ -147,27 +147,25 @@ class Chart:
                     adjust_zero = self.get_lowest_value(row)
 
                     if row_index == 0:
-                        self.output += self.get_legend(row)
+                        print self.get_legend(row)
                     else:
                         column_ = self.get_styled_value(1, 
                                                         row[1], 
                                                         current_style,
                                                         adjust_zero)
-                        self.output += "%s %s" % (row[0], column_)
+                        print "%s %s" % (row[0], column_)
 
                         for column_index, column in enumerate(row):
 
                             current_style = 0 if current_style == 1 else 1
 
                             if column_index != 0 and column_index != 1:
-                                self.output += self.get_styled_value(column_index, 
+                                print self.get_styled_value(column_index, 
                                                             column,
                                                             current_style,
                                                             adjust_zero)
 
-                    self.output += "\r"
-            
-            return self.output
+                    print "\r"
 
         except Exception:
             print "Unable to open your CSV file"
@@ -207,5 +205,3 @@ if __name__ == "__main__":
         print "Please include a path to a CSV file to parse"
     else:
         chart = Chart(file=args.file, show_values=args.show_values)
-
-        print chart.output
