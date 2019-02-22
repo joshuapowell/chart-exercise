@@ -5,7 +5,9 @@ Created by Joshua Powell on 02/21/2019.
 
 
 import argparse
+import copy 
 import csv
+import time
 import sys
 
 
@@ -115,16 +117,19 @@ class Chart:
                 key = key + (" %s %s") % (column, self.style[current_style])
                 current_style = 0 if current_style == 1 else 1
 
+        key = key + (" zero |")
+
         return key
 
     def get_lowest_value(self, data):
 
         lowest = 0
 
-        for item in data:
-            value = self.get_value(item)
-            if value < lowest:
-                lowest = value
+        for row in data:
+            for item in row:
+                value = self.get_value(item)
+                if value < lowest:
+                    lowest = value
 
         return lowest
 
@@ -135,41 +140,60 @@ class Chart:
 
         :return None
         """
+        chart_output_filename = "output/chart-%s.txt" % (time.time())
+        chart_output = open(chart_output_filename, "w")
+
         try:
             with open(self.file) as csvfile:
                 reader = csv.reader(csvfile)
+
+                adjust_zero = self.get_lowest_value(reader)
+                
+                csvfile.seek(0)
 
                 for row_index, row in enumerate(reader):
 
                     current_style = 0
 
-                    # NEED TO CHECK HERE FOR LOWEST NEGATIVE VALUE
-                    adjust_zero = self.get_lowest_value(row)
-
                     if row_index == 0:
-                        print self.get_legend(row)
+                        legend = self.get_legend(row)
+                        print legend                        
+                        chart_output.write(legend.encode('utf-8'))
+                        chart_output.write("\r")
                     else:
                         column_ = self.get_styled_value(1, 
                                                         row[1], 
                                                         current_style,
                                                         adjust_zero)
-                        print "%s %s" % (row[0], column_)
+                        group_row = "%s %s" % (row[0], column_)
+
+                        print group_row
+                        chart_output.write(group_row.encode('utf-8'))
 
                         for column_index, column in enumerate(row):
 
                             current_style = 0 if current_style == 1 else 1
 
                             if column_index != 0 and column_index != 1:
-                                print self.get_styled_value(column_index, 
-                                                            column,
-                                                            current_style,
-                                                            adjust_zero)
+                              col_group = self.get_styled_value(column_index, 
+                                                                column,
+                                                                current_style,
+                                                                adjust_zero)
+                              print col_group
+                              chart_output.write("\r")
+                              chart_output.write(col_group.encode('utf-8'))
+
+                        chart_output.write("\r")
 
                     print "\r"
+                    chart_output.write("\r")
 
         except Exception:
             print "Unable to open your CSV file"
 
+        chart_output.close()
+
+        print "A copy of this chart was saved to %s" % chart_output_filename
 
 if __name__ == "__main__":
 
@@ -198,7 +222,7 @@ if __name__ == "__main__":
                         help="Display bar values, defaults to True")
 
     args = parser.parse_args()
-    
+
     """Load and display the chart based on user defined values.
     """
     if 'file' not in args or not args.file:
