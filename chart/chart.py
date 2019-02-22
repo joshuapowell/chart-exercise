@@ -146,8 +146,8 @@ class Chart(object):
         chart_output_filename = "output/chart-%s.txt" % (time.time())
         chart_output = open(chart_output_filename, "wb")
 
-        # try:
-        with open(self.file) as csvfile:
+        try:
+            with open(self.file) as csvfile:
                 reader = csv.reader(csvfile)
 
                 adjust_zero = self.get_lowest_value(reader)
@@ -191,8 +191,8 @@ class Chart(object):
                     print("\r")
                     chart_output.write(b"\r")
 
-        # except Exception:
-        #     print("Unable to open your CSV file")
+        except Exception:
+            print("Unable to open your CSV file")
 
         chart_output.close()
 
