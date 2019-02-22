@@ -5,6 +5,10 @@
 # Chart from CSV
 Parse a CSV and generate a bar chart of the data.
 
+## Starting Point
+I started by playing around with ideas in Jupyter Notebooks, to see original
+explorations see `SimplePythonBarChart.ipynb`
+
 ## Installation
 You do not need to install anything for this script to execute. The only 
 requirement is Python 2.7 or Python 3.6.8.
