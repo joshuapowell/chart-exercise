@@ -2,6 +2,24 @@
 ## Overview
 Parse a CSV and generate a bar chart of the data.
 
+
+```
+python start.py --help
+```
+
+```
+python start.py --file=data/sample1.csv
+```
+
+```
+python start.py --file=data/sample1.csv --show_values=False
+```
+
+
+
+
+## Objectives
+
 1. Use any programming language
 2. Include instructions to run
 3. Output the chart however you choose, but do not use a charting library
