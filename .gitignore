@@ -4,3 +4,4 @@ venv
 output/*.txt
 
 *.pyc
+.DS_Store
