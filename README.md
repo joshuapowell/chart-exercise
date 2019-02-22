@@ -3,12 +3,15 @@ Parse a CSV and generate a bar chart of the data.
 
 ## Installation
 You do not need to install anything for this script to execute. The only 
-requirement is Python 2.7.
+requirement is Python 2.7 or Python 3.6.8.
 
 ## Usage
 To convert a file name `sample1.csv` that lives in the `data` directory of this
 project, enter the following command at the command prompt from the project's
 root directory.
+
+To run this program with Python 3+, replace any instance of `python` in the
+commands below with `python3`.
 
 ```
 python run.py --file=data/sample1.csv
@@ -48,8 +51,14 @@ be installed in the project directory.
 To create a virtual environment to install project specific packages to,
 execute this command at the Command Line.
 
+Python 2
 ```
 virtualenv venv
+```
+
+Python 3
+```
+virtualenv -p python3 venv
 ```
 
 To start the virtual environment after installation. Execute the following
@@ -61,6 +70,8 @@ source venv/bin/activate
 
 Finally, to install the testing packages execute the following command.
 
+
+Python 2 or Python 3
 ```
 pip install -r requirements.txt
 ```
