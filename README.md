@@ -10,9 +10,11 @@ root directory.
 python run.py --file=data/sample1.csv
 ```
 
-Running the command should produce a chart that looks like this.
+Running the command should produce a chart in the console and saves a `*.txt`
+version of the chart to a file in the `output` directory.
 
 <img src="examples/sample1.png" />
+<img src="examples/sampleTextFile1.png" />
 
 If you don't see a bar chart that looks similar to the image above, check the
 following.
