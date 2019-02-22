@@ -1,3 +1,4 @@
+# Chart from CSV
 Parse a CSV and generate a bar chart of the data.
 
 <img src="examples/sample1.png" />
