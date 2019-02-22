@@ -26,7 +26,7 @@ class Chart:
             u'\u2591',
             u'\u2593'
         ]
-
+        self.output = ""
         self.show_values = show_values
 
         self.load()
@@ -135,8 +135,8 @@ class Chart:
 
         :return None
         """
-        # try:
-        with open(self.file) as csvfile:
+        try:
+            with open(self.file) as csvfile:
                 reader = csv.reader(csvfile)
 
                 for row_index, row in enumerate(reader):
@@ -147,31 +147,33 @@ class Chart:
                     adjust_zero = self.get_lowest_value(row)
 
                     if row_index == 0:
-                        print self.get_legend(row)
+                        self.output += self.get_legend(row)
                     else:
                         column_ = self.get_styled_value(1, 
                                                         row[1], 
                                                         current_style,
                                                         adjust_zero)
-                        print "%s %s" % (row[0], column_)
+                        self.output += "%s %s" % (row[0], column_)
 
                         for column_index, column in enumerate(row):
 
                             current_style = 0 if current_style == 1 else 1
 
                             if column_index != 0 and column_index != 1:
-                                print self.get_styled_value(column_index, 
+                                self.output += self.get_styled_value(column_index, 
                                                             column,
                                                             current_style,
                                                             adjust_zero)
 
-                    print "\r"
+                    self.output += "\r"
+            
+            return self.output
 
-        # except Exception:
-        #     print "Unable to open your CSV file"
+        except Exception:
+            print "Unable to open your CSV file"
 
 
-if sys.argv and len(sys.argv) >= 2:
+if __name__ == "__main__":
 
     def boolean_string(argument):
         """Create custom string type to ensure that True/False are bool values.
@@ -191,17 +193,19 @@ if sys.argv and len(sys.argv) >= 2:
     parser.add_argument('--file',
                         type=str,
                         help="This can be a relative path `data/sample1.csv`"
-                             " or it can be an asolute path `/[DIR]/1.csv`")
+                            " or it can be an asolute path `/[DIR]/1.csv`")
     parser.add_argument('--show_values',
                         default=True,
                         type=boolean_string,
                         help="Display bar values, defaults to True")
 
     args = parser.parse_args()
-
+    
     """Load and display the chart based on user defined values.
     """
-    chart = Chart(file=args.file, show_values=args.show_values)
+    if 'file' not in args or not args.file:
+        print "Please include a path to a CSV file to parse"
+    else:
+        chart = Chart(file=args.file, show_values=args.show_values)
 
-else:
-    print "Please include a path to your CSV file"
+        print chart.output
