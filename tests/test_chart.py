@@ -130,5 +130,49 @@ class TestExample(unittest.TestCase):
 
             self.assertIsNone(output_)
 
+    def test_chartIsNumberWholeNumber(self):
+        """Whole Number."""
+        value1 = Chart(file="", show_values=False).is_number(1)
+        self.assertTrue(value1)
+
+    def test_chartIsNumberWholeNumberAsString(self):
+        """Whole Number as String."""
+        value2 = Chart(file="", show_values=False).is_number('1')
+        self.assertTrue(value2)
+        
+    def test_chartIsNumberFloat(self):
+        """Float."""
+        value3 = Chart(file="", show_values=False).is_number(1.19283)
+        self.assertTrue(value3)
+
+    def test_chartIsNumberFloatAsString(self):
+        """Float as String."""
+        value3 = Chart(file="", show_values=False).is_number('1.19283')
+        self.assertTrue(value3)
+
+    def test_chartIsNumberNegativeFloat(self):
+        """Negative Float."""
+        value4 = Chart(file="", show_values=False).is_number(-1.19283)
+        self.assertTrue(value4)
+
+    def test_chartIsNumberNegativeFloatAsString(self):
+        """Negative Float as String."""
+        value4 = Chart(file="", show_values=False).is_number('-1.19283')
+        self.assertTrue(value4)
+
+    def test_chartIsNumberNegativeWholeNumber(self):
+        """Negative Whole Number."""
+        value5 = Chart(file="", show_values=False).is_number(-1)
+        self.assertTrue(value5)
+
+    def test_chartIsNumberNegativeWholeNumberAsString(self):
+        """Negative Whole Number as String."""
+        value5 = Chart(file="", show_values=False).is_number('-1')
+        self.assertTrue(value5)
+
+    def test_chartIsNumberNonNumberValueAsString(self):
+        """Non-numeric String Value."""
+        value6 = Chart(file="", show_values=False).is_number('a')
+        self.assertFalse(value6)
 
 
